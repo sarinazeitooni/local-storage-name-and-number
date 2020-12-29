@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+<body>
+
+    <label for="name">enter your name</label>
+    <input id="name"  type="input" name="name">
+    <label for="phoneNumber">enter your phone number</label>
+    <input id="phoneNumber"  type="input" name="phoneNumber">
+    <button onclick="getValue()">add</button>
+    <button onclick="show()">show</button>
+
+
+    <div id="container"></div>
+    <script>
+        let name,phoneNumber;
+        let people = [];
+        let container = document.getElementById("container");
+        function getValue(){
+            name = document.getElementById("name").value;
+            phoneNumber = document.getElementById("phoneNumber").value;
+            addingToArray();
+            settingLocalItem();
+        };
+        function addingToArray(){
+            people.push({ name: name , phoneNumber: phoneNumber });
+            name.value = "";
+            phoneNumber.value = "";
+        };
+       function settingLocalItem(){
+            for(let i=0;i<people.length;i++){
+                  localStorage.setItem("name"+i,people[i].name); 
+                  localStorage.setItem("phoneNumber"+i,people[i].phoneNumber);   
+            };
+       };
+        function show(){
+            console.log(localStorage);
+            for(let i=0;i<people.length;i++){
+                container.innerHTML += `<h4>${localStorage["name"+i]}: ${localStorage["phoneNumber"+i]}</h4>`;
+            };
+        };
+      
+    </script>
+</body>
+</html>
